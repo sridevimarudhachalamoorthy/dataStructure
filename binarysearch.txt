@@ -1,0 +1,44 @@
+#include<stdio.h>
+
+void search(int l,int r,int m,int v, int arr[]){
+    if(arr[m]==v){
+        printf("%d is available on %d",v,m);
+    }
+    else if(arr[m]<v){
+        l=m;
+        m=(l+r)/2;
+        search(l,r,m,v,arr);
+    }
+    else if(arr[m]>v){
+        r=m;
+        m=(l+r)/2;
+        search(l,r,m,v,arr);
+    }
+    
+}
+
+int main(){
+    int size,arr[10],value,left,right,mid;
+    printf("\nenter value:  ");
+    scanf("%d",&size);
+    printf("\nenter data ");
+    for(int i=0;i<size;i++){
+        scanf("%d",&arr[i]);
+    }
+    for(int i=0;i<size;i++){
+        for(int j=i+1;j<size;j++){
+            if(arr[i]<arr[j]){
+                int temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+            }
+        }
+    }
+    printf("\n enter value  ");
+    scanf("%d",&value);
+    left=0;
+    right=size-1;
+    mid=(left+right)/2;
+    search(left,right,mid,value,arr);
+    return 0;
+}
